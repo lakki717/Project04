@@ -32,8 +32,11 @@ def open_new_window():
         label.pack()
 
 
-def open_new_window():
-    img= load_image(url)
+def open_new_window(): # функция загрузки по тегу
+    tag = tag_entry.get() #считываем тег – то что ввел пользователь
+    url_with_tag = f'https://cataas.com/cat/{tag}' if tag else 'https://cataas.com/cat'  # адрес с тегом
+    img = load_image(url_with_tag)
+
     if img:
         new_window = Toplevel()
         new_window.title("Картинка с котиком")
@@ -51,8 +54,14 @@ window = Tk()
 window.title("Cats!")
 window.geometry("600x520")
 
-# update_button=Button(text="Обновить", command=set_image)
-# update_button.pack()
+# Поле ввода для тегов
+tag_entry = Entry()
+tag_entry.pack()
+
+# Кнопка для загрузки изображения с тегом
+load_button = Button(text="Загрузить по тегу", command=open_new_window)
+load_button.pack()
+
 
 menu_bar = Menu(window)
 window.config(menu=menu_bar)
